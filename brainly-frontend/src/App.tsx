@@ -1,15 +1,16 @@
-import './App.css'
-import { Button } from './components/Button'
-import { PlusIcon } from './icons/plusicon'
+import { Dashboard } from "./pages/dashboard"
+import { Signup } from "./pages/signup"
+import { Signin } from "./pages/signin"
+import { BrowserRouter, Routes, Route} from "react-router-dom"
 
 function App() {
-    return (
-        <>
-        <Button startIcon={<PlusIcon />} size = 'sm' varient='primary' text= "share"></Button>
-        <Button size = 'md' varient='secondary' text= "Add Content"></Button>
-        <Button startIcon={<PlusIcon />} size = 'lg' varient='secondary' text= "Add Content"></Button>
-        </>
-    )
+    return <BrowserRouter>
+        <Routes>
+            <Route path="/signup" element={<Signup/>}/>
+            <Route path="/signin" element={<Signin/>}/>
+            <Route path="/dashboard" element={<Dashboard/>}/>
+        </Routes>
+    </BrowserRouter>
 }   
 
 export default App
