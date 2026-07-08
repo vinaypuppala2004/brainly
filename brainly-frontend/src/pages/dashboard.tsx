@@ -6,10 +6,12 @@ import { ShareIcon } from '../icons/ShareIcon'
 import { CreateContentModal } from '../components/createContent'
 import { useState } from 'react'
 import { Sidebar } from '../components/sidebar'
+import { useContent } from '../hooks/useContent'
 
 export function Dashboard() {
     
     const [modalOpen, setModalOpen] = useState(false);
+    const contents = useContent();
     return <div p-4>
         <div>
             <Sidebar />
@@ -24,9 +26,17 @@ export function Dashboard() {
                     setModalOpen(true)
                 } size = 'md' varient='secondary' text= "Add Content"></Button>
             </div>
-            <div className='flex gap-4'>
-                <Card type="youtube" link="https://www.youtube.com/watch?v=b68HETiNO98&list=RDb68HETiNO98&start_radio=1" title= "sai abhanynkar"/>
-                <Card type="twitter" link = "https://x.com/narendramodi/status/2071992136619442579" title="MODI"></Card>
+           <div className="columns-1 md:columns-2 lg:columns-3 gap-6 p-6">
+                {contents.map(({_id, type, link, title, tags}) =>
+                    <div key={_id} className="break-inside-avoid mb-6">
+                        <Card
+                            type={type}
+                            link={link}
+                            title={title}
+                            tags={tags}
+                        />
+                    </div>
+                )}
             </div>
         </div>
     </div>

@@ -12,7 +12,9 @@ const contentSchema = new Schema({
     title : String,
     link: String,
     tags: [{type: mongoose.Types.ObjectId, ref: 'Tag'}],
+    type: {type: String, enum: ["youtube", "twitter"], required: true},
     userId: {type: mongoose.Types.ObjectId, ref: 'user'}
+
 })
 
 const tagSchema = new Schema({
@@ -31,4 +33,4 @@ export const contentModel = model("content", contentSchema);
 
 export const UserModel = model("user", UserSchema);
 
-export const tagModel = model("tags", tagSchema);
+export const tagModel = model("Tag", tagSchema);

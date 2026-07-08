@@ -4,8 +4,10 @@ import jwt from "jsonwebtoken";
 import {contentModel, UserModel, tagModel, LinkModel} from "./db.js";
 import userauth from "./middlewares.js"
 import crypto from "crypto";
+import cors from "cors";
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 const JWT_PASSWORD = "1234567890"
@@ -15,15 +17,15 @@ app.post("/api/v1/signup", async (req, res) => {
 
     try {
         await UserModel.create({
-        username: username,
-        password: password
+          username: username,
+          password: password
         })
 
         res.status(201).json({message: "admin registered successfully"});
     }
 
     catch(e) {
-        res.status(411).json({message: "user already exists"});
+        res.status(411).json({message: "user already exists"+e});
     }
     
 })
@@ -38,7 +40,7 @@ app.post("/api/v1/signin", async (req, res) => {
     })
 
     if(exist) {
-        const token = jwt.sign({username}, JWT_PASSWORD);
+        const token = jwt.sign({ id: exist._id, username: exist.username}, JWT_PASSWORD);
         res.json({token})
     }
     else {
@@ -48,7 +50,7 @@ app.post("/api/v1/signin", async (req, res) => {
 
 app.post("/api/v1/content", userauth, async (req, res) => {
   try {
-    const { link, title, tags } = req.body;
+    const { link, title, type, tags = [] } = req.body;
 
     const tagIds = [];
 
@@ -71,7 +73,7 @@ app.post("/api/v1/content", userauth, async (req, res) => {
       link,
       title,
       tags: tagIds,
-
+      type,
       // @ts-ignore
       userId: req.userId,
     });
@@ -94,7 +96,7 @@ app.delete("/api/v1/content", userauth, async (req, res) => {
 
     try {
       await contentModel.deleteMany({
-        contentId,
+        _id: contentId,
         // @ts-ignore
         userId: req.userId
       })
@@ -118,7 +120,7 @@ app.get("/api/v1/content", userauth, async (req, res) => {
 
   } catch (e) {
     res.status(500).json({
-      message: "error fetching content",
+      message: "error fetching content"+e,
     });
   }
 });

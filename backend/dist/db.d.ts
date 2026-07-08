@@ -51,6 +51,7 @@ export declare const LinkModel: mongoose.Model<{
     __v: number;
 }>;
 export declare const contentModel: mongoose.Model<{
+    type: "youtube" | "twitter";
     tags: mongoose.Types.ObjectId[];
     title?: string | null;
     link?: string | null;
@@ -58,6 +59,7 @@ export declare const contentModel: mongoose.Model<{
 }, {}, {}, {
     id: string;
 }, mongoose.Document<unknown, {}, {
+    type: "youtube" | "twitter";
     tags: mongoose.Types.ObjectId[];
     title?: string | null;
     link?: string | null;
@@ -65,6 +67,7 @@ export declare const contentModel: mongoose.Model<{
 }, {
     id: string;
 }, mongoose.DefaultSchemaOptions> & Omit<{
+    type: "youtube" | "twitter";
     tags: mongoose.Types.ObjectId[];
     title?: string | null;
     link?: string | null;
@@ -76,11 +79,13 @@ export declare const contentModel: mongoose.Model<{
 }, "id"> & {
     id: string;
 }, mongoose.Schema<any, mongoose.Model<any, any, any, any, any, any, any>, {}, {}, {}, {}, mongoose.DefaultSchemaOptions, {
+    type: "youtube" | "twitter";
     tags: mongoose.Types.ObjectId[];
     title?: string | null;
     link?: string | null;
     userId?: mongoose.Types.ObjectId | null;
 }, mongoose.Document<unknown, {}, {
+    type: "youtube" | "twitter";
     tags: mongoose.Types.ObjectId[];
     title?: string | null;
     link?: string | null;
@@ -88,6 +93,7 @@ export declare const contentModel: mongoose.Model<{
 }, {
     id: string;
 }, mongoose.DefaultSchemaOptions> & Omit<{
+    type: "youtube" | "twitter";
     tags: mongoose.Types.ObjectId[];
     title?: string | null;
     link?: string | null;
@@ -99,6 +105,7 @@ export declare const contentModel: mongoose.Model<{
 }, "id"> & {
     id: string;
 }, unknown, {
+    type: "youtube" | "twitter";
     tags: mongoose.Types.ObjectId[];
     title?: string | null;
     link?: string | null;
@@ -108,6 +115,7 @@ export declare const contentModel: mongoose.Model<{
 } & {
     __v: number;
 }>, {
+    type: "youtube" | "twitter";
     tags: mongoose.Types.ObjectId[];
     title?: string | null;
     link?: string | null;

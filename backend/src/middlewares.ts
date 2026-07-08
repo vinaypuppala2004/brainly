@@ -11,8 +11,7 @@ function userauth(req: Request, res: Response, next: NextFunction) {
             return res.status(401).send("token missing")
         }
         
-        const decoded = jwt.verify(token as string, JWT_PASSWORD);
-
+        const decoded = jwt.verify(token as string, JWT_PASSWORD) as {id: string; username: string;};
         if(decoded) {
             // @ts-ignore
             req.userId = decoded.id;
